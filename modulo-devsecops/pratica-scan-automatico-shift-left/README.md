@@ -1,9 +1,5 @@
 # 🛡️ Prática: Scan Automático de Segurança (Shift-Left)
 
-Este projeto consiste em uma aplicação Node.js integrada a uma esteira automatizada de segurança (CI/CD) desenvolvida para o módulo de **DevSecOps**. O objetivo central é implementar a estratégia de **Shift-Left Security**, detectando vulnerabilidades de forma antecipada a cada alteração no código.
-
----
-
 ## 🚀 Sobre o Projeto
 
 A aplicação simula um serviço web construído em Node.js com a biblioteca Express. A pipeline de integração contínua (GitHub Actions) analisa preventivamente a qualidade do código, as dependências utilizadas e o comportamento da aplicação em tempo de execução antes que qualquer alteração chegue à branch principal.
@@ -30,25 +26,41 @@ A aplicação simula um serviço web construído em Node.js com a biblioteca Exp
 
 ## 📊 Evidências de Execução
 
-### 1. Visão Geral da Pipeline (GitHub Actions)
+<details>
+<summary><b>1. Visão Geral da Pipeline (GitHub Actions)</b></summary>
+<br>
+
 Execução automatizada bem-sucedida de todos os *checks* de segurança:
 
 ![Visão Geral da Pipeline](./images/01-pipeline-checks.png)
+</details>
 
-### 2. Análise Estática de Código - SAST (Semgrep)
+<details>
+<summary><b>2. Análise Estática de Código - SAST (Semgrep)</b></summary>
+<br>
+
 Log da varredura estática de código com 0 vulnerabilidades bloqueantes encontradas:
 
 ![Evidência SAST Semgrep](./images/02-sast-semgrep.png)
+</details>
 
-### 3. Checagem de Dependências - SCA (Trivy)
+<details>
+<summary><b>3. Checagem de Dependências - SCA (Trivy)</b></summary>
+<br>
+
 Log do scanner de composição inspecionando os pacotes do ecossistema Node.js:
 
 ![Evidência SCA Trivy](./images/03-sca-trivy.png)
+</details>
 
-### 4. Análise Dinâmica da Aplicação - DAST (OWASP ZAP)
+<details>
+<summary><b>4. Análise Dinâmica da Aplicação - DAST (OWASP ZAP)</b></summary>
+<br>
+
 Relatório automatizado e registro de issue no GitHub apontando a ausência de cabeçalhos de segurança na aplicação em execução:
 
 ![Evidência DAST OWASP ZAP](./images/04-dast-zap-issue.png)
+</details>
 
 ---
 
