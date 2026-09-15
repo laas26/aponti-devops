@@ -9,6 +9,10 @@ on:
     paths:
       - 'modulo-devsecops/pratica-scan-automatico-shift-left/**'
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   # 1. Análise Estática de Segurança no Código Fonte (SAST)
   sast_scan:
