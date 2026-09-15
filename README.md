@@ -10,7 +10,7 @@ O repositório é organizado de forma modular, garantindo a separação entre a 
 
 ```text
 
-├── .github/workflows/          # Esteiras automatizadas de CI/CD (SAST, SCA, DAST, GitGuardian)
+├── .github/workflows/          # Esteiras automatizadas de CI/CD (SAST, SCA, DAST)
 ├── modulo-devsecops/         # Resoluções práticas, scripts e documentação técnica
 └── material-de-estudo/        # Slides, apostilas e enunciados divididos por módulos e unidades
                         
