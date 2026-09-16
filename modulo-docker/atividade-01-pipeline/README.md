@@ -1,9 +1,7 @@
 # Atividade Prática: Validação Automática de Serviço Docker em CI/CD
 
----
-
 ### 1. De onde a imagem foi obtida
-A imagem foi obtida do registry público oficial **Docker Hub** através do repositório oficial da imagem: [https://hub.docker.com/_/redis](https://hub.docker.com/_/redis).
+A imagem foi obtida do registry público oficial **Docker Hub** através do repositório oficial da imagem: **[https://hub.docker.com/_/redis](https://hub.docker.com/_/redis)**.
 
 ---
 
@@ -29,6 +27,8 @@ Nome do contêiner instanciado: **`redis-service-test`**
 * **`docker exec redis-service-test redis-cli ping`**: Executa a CLI do Redis dentro do contêiner ativo para disparar o comando de *healthcheck* (`ping`).
 * **`docker stop redis-service-test`**: Interrompe a execução do contêiner.
 * **`docker rm redis-service-test`**: Remove o contêiner finalizado do ambiente.
+
+> 📄 **Workflow completo da automação:** **[docker-validation.yml](../../.github/workflows/docker-validation.yml)**.
 
 ---
 
