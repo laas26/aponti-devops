@@ -1,0 +1,74 @@
+# Nome do workflow exibido no painel de Actions do GitHub
+name: Validacao de Servico Redis
+
+# Eventos que disparam a execução da pipeline
+on:
+  push:
+    # Filtro para executar apenas se houver alterações nestes arquivos/pastas
+    paths:
+      - 'modulo-docker/**'
+      - '.github/workflows/docker-validation.yml'
+  # Permite acionar a pipeline manualmente pela interface do GitHub
+  workflow_dispatch:
+
+# Definição dos trabalhos (jobs)
+jobs:
+  validate-redis:
+    name: Teste e Validacao do Redis
+    # Define o sistema operacional do ambiente de execução (runner)
+    runs-on: ubuntu-latest
+
+    # Sequência de passos a serem executados
+    steps:
+      # Baixa o código-fonte do repositório para o runner
+      - name: Checkout do Repositorio
+        uses: actions/checkout@v4
+
+      # Etapa 1: Download da imagem Docker
+      - name: 1. Pull da Imagem do Registry
+        run: |
+          echo "Baixando imagem oficial do Redis Hub..."
+          # Baixa a imagem leve do Redis baseada em Alpine Linux
+          docker pull redis:alpine
+
+      # Etapa 2: Instanciação e execução do contêiner
+      - name: 2. Execucao do Container
+        run: |
+          echo "Iniciando o container em segundo plano..."
+          # -d: roda em segundo plano (detached mode)
+          # -p 6379:6379: redireciona a porta 6379 do host para o container
+          # --name redis-service-test: define um nome único para o container
+          docker run -d -p 6379:6379 --name redis-service-test redis:alpine
+
+      # Etapa 3: Validação de funcionamento (Smoke Test)
+      - name: 3. Operacao e Validacao (Ping / Pong)
+        run: |
+          echo "Aguardando inicializacao do Redis..."
+          # Pausa de 3 segundos para garantir a inicialização completa do serviço
+          sleep 3
+          
+          echo "Executando ping contra o container Redis..."
+          # Executa o comando 'redis-cli ping' no container e armazena a saída na variável RESPONSE
+          RESPONSE=$(docker exec redis-service-test redis-cli ping)
+          echo "Resposta do servidor Redis: $RESPONSE"
+          
+          # Condicional em Shell Script para verificar se a resposta é "PONG"
+          if [ "$RESPONSE" = "PONG" ]; then
+            echo "SUCCESS: O Redis esta ativo e respondendo corretamente!"
+          else
+            echo "ERROR: O Redis nao respondeu ao comando PING."
+            # Finaliza o script com erro para interromper a pipeline
+            exit 1
+          fi
+
+      # Etapa 4: Desalocação e limpeza dos recursos
+      - name: 4. Encerramento e Limpeza do Container
+        # if: always() garante que este passo rode mesmo se o passo anterior falhar
+        if: always()
+        run: |
+          echo "Finalizando e removendo o container..."
+          # Interrompe o contêiner (|| true evita quebrar a limpeza caso já esteja parado)
+          docker stop redis-service-test || true
+          # Remove o contêiner do sistema do runner
+          docker rm redis-service-test || true
+          echo "Ambiente limpo com sucesso."
