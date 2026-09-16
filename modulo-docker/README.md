@@ -32,14 +32,3 @@ Este módulo contém as implementações práticas, automações e documentaçõ
 
 ---
 
-## 📂 Estrutura da Pasta do Módulo
-
-```text
-modulo-docker/
-├── README.md                          # Este arquivo (Índice Geral)
-└── atividade-01-pipeline/             # Atividade 01: Pipeline com Redis
-    ├── README.md                      # Respostas e documentação da entrega
-    └── pipeline-success.png           # Evidência da execução no GitHub Actions
-```
-
----
