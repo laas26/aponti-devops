@@ -1,8 +1,6 @@
 # 🛡️ Prática: Scan Automático de Segurança (Shift-Left)
 
-## 🚀 Sobre o Projeto
-
-A aplicação simula um serviço web construído em Node.js com a biblioteca Express. A pipeline de integração contínua (GitHub Actions) analisa preventivamente a qualidade do código, as dependências utilizadas e o comportamento da aplicação em tempo de execução antes que qualquer alteração chegue à branch principal.
+> A aplicação simula um serviço web construído em Node.js com a biblioteca Express. A pipeline de integração contínua (GitHub Actions) analisa preventivamente a qualidade do código, as dependências utilizadas e o comportamento da aplicação em tempo de execução antes que qualquer alteração chegue à branch principal.
 
 ---
 
@@ -19,8 +17,18 @@ A aplicação simula um serviço web construído em Node.js com a biblioteca Exp
 ## 🔄 Funcionamento da Pipeline
 
 1. **Gatilhos (Triggers):** A pipeline é acionada automaticamente nos eventos de `push` e `pull_request` no repositório.
-2. **Estágio de Análise:** Três *jobs* independentes são disparados em paralelo para execução dos scanners (Semgrep, Trivy e OWASP ZAP).
+2. **Estágio de Análise:** Três jobs independentes são disparados em paralelo para execução dos scanners (Semgrep, Trivy e OWASP ZAP).
 3. **Tratamento de Encontrados (Findings):** Se falhas críticas forem identificadas, a pipeline falha a checagem (*quality gate*) e notifica as vulnerabilidades no relatório do GitHub.
+
+> 📄 **Workflow completo da automação:** [scan-automatico-shift-left.yml](../../.github/workflows/scan-automatico-shift-left.yml)
+
+---
+
+## 📁 Estrutura do Projeto
+
+* `index.js`: Ponto de entrada do serviço Express (simulação de API).
+* `package.json`: Gerenciador de dependências e scripts do projeto.
+* `.github/workflows/`: Workflows do GitHub Actions para a pipeline de DevSecOps.
 
 ---
 
