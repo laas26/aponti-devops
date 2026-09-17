@@ -1,6 +1,12 @@
 # 🛡️ Prática: Scan Automático de Segurança (Shift-Left)
 
+<<<<<<< HEAD
 > A aplicação simula um serviço web construído em Node.js com a biblioteca Express. A pipeline de integração contínua (GitHub Actions) analisa preventivamente a qualidade do código, as dependências utilizadas e o comportamento da aplicação em tempo de execução antes que qualquer alteração chegue à branch principal.
+=======
+## 🚀 Sobre o Projeto
+
+A aplicação simula um serviço web construído em Node.js com a biblioteca Express. A pipeline de integração contínua (GitHub Actions) analisa preventivamente a qualidade do código, as dependências utilizadas e o comportamento da aplicação em tempo de execução antes que qualquer alteração chegue à branch principal.
+>>>>>>> 29ecdd7 (docs(material): atualiza e finaliza indice de conteudos do modulo 01)
 
 ---
 
