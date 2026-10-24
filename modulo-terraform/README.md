@@ -42,10 +42,11 @@ terraform destroy
 
 ### 📌 Variáveis
 
-| Variável        | Descrição                          | Padrão     |
-| --------------- | ---------------------------------- | ---------- |
-| `aws_region`   | Região AWS                         | `us-east-1`|
-| `instance_type`| Tipo da instância EC2              | `t3.micro` |
+| Variável        | Descrição                          | Padrão             |
+| --------------- | ---------------------------------- | ------------------ |
+| `aws_region`   | Região AWS                         | `us-east-1`        |
+| `instance_type`| Tipo da instância EC2              | `t2.micro`         |
+| `ami_id`       | AMI ID da imagem Ubuntu           | `ami-0c7217cdde317cfec` |
 
 ### 🔑 Credenciais
 

@@ -9,5 +9,12 @@ variable "aws_region" {
 variable "instance_type" {
   description = "Tipo da instância EC2 para a VM DevOps Lab"
   type        = string
-  default     = "t3.micro"
+  default     = "t2.micro"
+}
+
+# AMI ID da imagem Ubuntu usada na instância
+variable "ami_id" {
+  description = "AMI ID da imagem Ubuntu Server para a instância"
+  type        = string
+  default     = "ami-0c7217cdde317cfec"
 }
