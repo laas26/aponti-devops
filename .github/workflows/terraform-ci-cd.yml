@@ -1,0 +1,65 @@
+# Nome do workflow exibido no painel de Actions do GitHub
+name: Terraform - Modulo DevOps Lab
+
+# Eventos que disparam a execução da pipeline
+on:
+  push:
+    branches:
+      - main
+    # Filtro para executar apenas se houver alterações nestes arquivos/pastas
+    paths:
+      - 'modulo-terraform/**'
+      - '.github/workflows/terraform-ci-cd.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'modulo-terraform/**'
+      - '.github/workflows/terraform-ci-cd.yml'
+  # Permite acionar a pipeline manualmente pela interface do GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: Terraform - Init, Fmt, Validate e Plan
+    # Define o sistema operacional do ambiente de execução (runner)
+    runs-on: ubuntu-latest
+
+    # Todas as etapas `run` são executadas dentro do diretório do módulo
+    defaults:
+      run:
+        working-directory: ./modulo-terraform
+
+    steps:
+      # Baixa o código-fonte do repositório para o runner
+      - name: Checkout do Repositorio
+        uses: actions/checkout@v4
+
+      # Configura a versão do Terraform desejada
+      - name: Setup do Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.0
+
+      # Inicializa o backend e o provedor AWS
+      - name: Terraform Init
+        run: terraform init
+
+      # Verifica se o código Terraform está formatado corretamente
+      - name: Terraform Fmt Check
+        run: terraform fmt -check -recursive
+
+      # Valida a sintaxe e o schema da configuração
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Gera o plano de execução da infraestrutura
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1

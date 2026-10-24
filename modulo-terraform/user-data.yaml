@@ -1,0 +1,24 @@
+#cloud-config
+# Cloud-Init: configuração inicial da VM do laboratório DevOps
+# Este arquivo é carregado automaticamente pelo Cloud-Init na primeira inicialização da instância.
+
+# Define o hostname padrão da máquina
+hostname: vm-devops-lab
+fqdn: vm-devops-lab
+
+# Atualiza a lista de pacotes e aplica as atualizações disponíveis antes da instalação
+package_update: true
+package_upgrade: true
+
+# Pacotes instalados via apt (atualização + instalação)
+packages:
+  - docker.io
+  - nginx
+
+# Comandos executados após a inicialização do sistema
+runcmd:
+  # Habilita e inicia o serviço Docker
+  - [ systemctl, enable, --now, docker ]
+
+  # Habilita e inicia o serviço Nginx
+  - [ systemctl, enable, --now, nginx ]
