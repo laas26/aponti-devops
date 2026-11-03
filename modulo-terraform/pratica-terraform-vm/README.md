@@ -1,4 +1,4 @@
-# Módulo Terraform - VM DevOps Lab
+# Prática Terraform - Provisionamento de VM DevOps Lab
 
 Esta atividade implementa a infraestrutura como código (IaC) para a criação de uma máquina virtual Linux (Ubuntu) no AWS, destinada ao laboratório DevOps.
 

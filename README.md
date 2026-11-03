@@ -9,7 +9,7 @@ Repositório dedicado ao armazenamento de projetos, automações e práticas des
 O repositório é organizado de forma modular, garantindo a separação entre a fundamentação teórica e as implementações práticas em código:
 
 ```text
-.
+aponti-devops
 ├── .github/workflows/         # Esteiras automatizadas de CI/CD (GitHub Actions)
 ├── modulo-docker/             # Práticas de conteinerização e orquestração Docker
 ├── modulo-devsecops/          # Resoluções práticas, scripts de segurança e documentação
