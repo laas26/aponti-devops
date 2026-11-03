@@ -1,6 +1,6 @@
 # Módulo Terraform - VM DevOps Lab
 
-Esta pasta contém a infraestrutura como código (IaC) para a criação de uma máquina virtual Linux (Ubuntu) no AWS, destinada ao laboratório DevOps.
+Esta atividade implementa a infraestrutura como código (IaC) para a criação de uma máquina virtual Linux (Ubuntu) no AWS, destinada ao laboratório DevOps.
 
 ## 🎯 Finalidade
 
@@ -16,10 +16,12 @@ O IP público gerado é exibido no output `public_ip`.
 
 ```text
 modulo-terraform/
-├── user-data.yaml   # Cloud-Init para hostname, pacotes, Docker e Nginx
-├── main.tf          # Configuração do Terraform (provedor AWS, data source e recurso EC2)
-├── variables.tf     # Variáveis (região e tipo de instância)
-└── outputs.tf       # Output com o IP público da VM
+└── pratica-terraform-vm/   # Atividade de provisionamento da VM
+    ├── user-data.yaml   # Cloud-Init para hostname, pacotes, Docker e Nginx
+    ├── main.tf          # Configuração do Terraform (provedor AWS e recurso EC2)
+    ├── variables.tf     # Variáveis (região, tipo de instância e AMI)
+    ├── outputs.tf       # Output com o IP público da VM
+    └── README.md        # Documentação da atividade
 ```
 
 ## 🚀 Como executar localmente
@@ -27,7 +29,10 @@ modulo-terraform/
 Pré-requisitos: [Terraform](https://developer.hashicorp.com/terraform/downloads) >= 1.5.0 e credenciais AWS configuradas.
 
 ```bash
-# 1. Inicializa o backend/provedor
+# 1. Entra no diretório da atividade
+cd modulo-terraform/pratica-terraform-vm
+
+# 2. Inicializa o backend/provedor
 terraform init
 
 # 2. Faz o plano da infraestrutura (após configurar as variáveis/secrets)
@@ -59,4 +64,4 @@ export AWS_SECRET_ACCESS_KEY=<SEU_SEGREDO>
 
 ## 🤖 CI/CD
 
-O workflow em `.github/workflows/terraform-ci-cd.yml` executa automaticamente `fmt`, `validate` e `plan` no diretório `modulo-terraform` sempre que há alterações nessa pasta.
+O workflow em `.github/workflows/terraform-ci-cd.yml` executa automaticamente `fmt`, `validate` e `plan` no diretório `modulo-terraform/pratica-terraform-vm` sempre que há alterações nessa pasta.

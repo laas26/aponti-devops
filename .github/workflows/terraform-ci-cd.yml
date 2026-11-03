@@ -28,10 +28,10 @@ jobs:
     # Define o sistema operacional do ambiente de execução (runner)
     runs-on: ubuntu-latest
 
-    # Todas as etapas `run` são executadas dentro do diretório do módulo
+    # Todas as etapas `run` são executadas dentro do diretório da atividade
     defaults:
       run:
-        working-directory: ./modulo-terraform
+        working-directory: ./modulo-terraform/pratica-terraform-vm
 
     steps:
       # Baixa o código-fonte do repositório para o runner
