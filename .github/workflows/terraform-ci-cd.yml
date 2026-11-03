@@ -18,6 +18,12 @@ on:
       - '.github/workflows/terraform-ci-cd.yml'
   # Permite acionar a pipeline manualmente pela interface do GitHub
   workflow_dispatch:
+    inputs:
+      apply:
+        description: "Executar terraform apply"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -71,6 +77,15 @@ jobs:
       # Gera o plano de execução da infraestrutura
       - name: Terraform Plan
         run: terraform plan
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+
+      # Aplicacao controlada da infraestrutura, quando autorizada
+      - name: Terraform Apply
+        if: ${{ inputs.apply == true }}
+        run: terraform apply -auto-approve
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -14,7 +14,6 @@ aponti-devops
 ├── modulo-docker/             # Práticas de conteinerização e orquestração Docker
 ├── modulo-devsecops/          # Resoluções práticas, scripts de segurança e documentação
 ├── modulo-terraform/          # Infraestrutura como código (Terraform) e VMs (AWS)
-│   └── pratica-terraform-vm/  # Atividade de provisionamento de VM (Terraform + Cloud-Init)
 └── material-de-estudo/        # Slides, apostilas e enunciados divididos por módulos
                         
 ```

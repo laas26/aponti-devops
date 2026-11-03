@@ -1,6 +1,6 @@
 # Prática Terraform - Provisionamento de VM DevOps Lab
 
-Esta atividade implementa a infraestrutura como código (IaC) para a criação de uma máquina virtual Linux (Ubuntu) no AWS, destinada ao laboratório DevOps.
+Esta atividade implementa a infraestrutura como código (IaC) para a criação de uma máquina virtual Linux (Ubuntu) no AWS.
 
 ## 🎯 Finalidade
 
@@ -65,3 +65,5 @@ export AWS_SECRET_ACCESS_KEY=<SEU_SEGREDO>
 ## 🤖 CI/CD
 
 O workflow em `.github/workflows/terraform-ci-cd.yml` executa automaticamente `fmt`, `validate` e `plan` no diretório `modulo-terraform/pratica-terraform-vm` sempre que há alterações nessa pasta.
+
+> **Observação:** O workflow pode falhar com o erro `No valid credential sources found` se as secrets `AWS_ACCESS_KEY_ID` e `AWS_SECRET_ACCESS_KEY` não estiverem configuradas no repositório. Para que o `terraform plan` prossiga, configure as secrets em **Settings → Secrets and variables → Actions**.
