@@ -56,6 +56,18 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
+      # Validacao das credenciais AWS antes de gerar o plano
+      - name: Terraform Check AWS Credentials
+        run: |
+          echo "Verificando se as credenciais AWS estao configuradas..."
+          if [ -z "${AWS_ACCESS_KEY_ID}" ] || [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
+            echo "::error::As variaveis AWS_ACCESS_KEY_ID e AWS_SECRET_ACCESS_KEY nao foram configuradas. Configure os secrets no repositorio."
+            exit 1
+          fi
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       # Gera o plano de execução da infraestrutura
       - name: Terraform Plan
         run: terraform plan
