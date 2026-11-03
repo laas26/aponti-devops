@@ -20,7 +20,6 @@ Thumbs.db
 # Terraform (evita versionamento de artefatos locais)
 **/.terraform/
 .terraform/
-.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
 crash.log
