@@ -20,7 +20,7 @@
 ```text
 Host (navegador / cliente MySQL)
    │
-   │  localhost:8080                localhost:3306
+   │  localhost:8081                localhost:3306
    ▼                                  ▼
 ┌───────────────┐   aponti_network  ┌────────────────┐
 │     nginx     │◄────────────────►│     mysql      │
@@ -106,7 +106,7 @@ Todos os comandos abaixo devem ser executados na pasta da atividade:
 cd modulo-docker/atividade-02-compose
 ```
 
-### Passo 1 — Configurar as variáveis de ambiente
+### Passo 1: Configurar as variáveis de ambiente
 
 Copie o arquivo de exemplo:
 
@@ -128,13 +128,13 @@ MYSQL_DATABASE=aponti_db
 MYSQL_USER=aponti_user
 MYSQL_PASSWORD=aponti_lab_2026
 MYSQL_PORT=3306
-NGINX_PORT=8080
+NGINX_PORT=8081
 TZ=America/Sao_Paulo
 ```
 
 > Em laboratório os valores acima são suficientes. Em qualquer ambiente real, troque as senhas e não versione o `.env`.
 
-### Passo 2 — Subir os serviços
+### Passo 2: Subir os serviços
 
 ```powershell
 docker compose up -d
@@ -156,18 +156,18 @@ docker compose logs -f mysql
 
 No `docker compose ps`, o MySQL deve aparecer como `healthy` e o Nginx como `running`. Use `Ctrl+C` para sair dos logs sem parar os containers.
 
-### Passo 3 — Acessar a aplicação Nginx
+### Passo 3: Acessar a aplicação Nginx
 
 Abra no navegador:
 
 ```text
-http://localhost:8080
+http://localhost:8081
 ```
 
 Teste também o endpoint de saúde:
 
 ```powershell
-curl.exe http://localhost:8080/health
+curl.exe http://localhost:8081/health
 ```
 
 Saída esperada:
@@ -178,7 +178,7 @@ OK - nginx ativo
 
 > No PowerShell, `curl` pode ser um alias de `Invoke-WebRequest`. Use `curl.exe` ou abra a URL diretamente no navegador.
 
-### Passo 4 — Acessar o banco de dados MySQL
+### Passo 4: Acessar o banco de dados MySQL
 
 Abra um cliente MySQL interativo **dentro do container** (sem precisar instalar o MySQL no host):
 
@@ -204,7 +204,7 @@ exit;
 
 > Acesso como `root` (quando necessário): `docker compose exec mysql sh -c 'MYSQL_PWD="$MYSQL_ROOT_PASSWORD" mysql -uroot'`.
 
-### Passo 5 — Inserir um registro para o teste de persistência
+### Passo 5: Inserir um registro para o teste de persistência
 
 Ainda no cliente MySQL (ou abrindo novamente), execute:
 
@@ -215,7 +215,7 @@ SELECT * FROM alunos;
 
 Anote a quantidade de registros retornada (deve ser **4**).
 
-### Passo 6 — Testar a comunicação entre os serviços
+### Passo 6: Testar a comunicação entre os serviços
 
 O Nginx e o MySQL compartilham a mesma rede. Primeiro, valide a resolução do nome do serviço a partir do container do Nginx:
 
@@ -243,7 +243,7 @@ OK: nginx alcancou mysql:3306
 
 > Esse teste comprova que o Nginx resolve e alcança o MySQL pelo nome do serviço na rede `aponti_network`. O nome DNS só funciona porque ambos estão na mesma rede do Compose.
 
-### Passo 7 — Comprovar a persistência dos dados
+### Passo 7: Comprovar a persistência dos dados
 
 Recrie os containers **sem remover o volume**:
 
@@ -266,7 +266,7 @@ docker compose exec mysql sh -c 'MYSQL_PWD="$MYSQL_PASSWORD" mysql -u"$MYSQL_USE
 
 O registro **`Aluno Persistencia`** deve continuar presente. Isso demonstra que o volume `aponti_mysql_data` preservou os dados mesmo após os containers serem destruídos e recriados.
 
-### Passo 8 — Demonstrar a perda de dados ao remover o volume (opcional)
+### Passo 8: Demonstrar a perda de dados ao remover o volume (opcional)
 
 > ⚠️ Este passo **apaga definitivamente** os dados do laboratório.
 
@@ -283,7 +283,7 @@ docker compose exec mysql sh -c 'MYSQL_PWD="$MYSQL_PASSWORD" mysql -u"$MYSQL_USE
 
 Isso evidencia a diferença entre `down` (preserva volume) e `down -v` (descarta volume).
 
-### Passo 9 — Encerrar e limpar o ambiente
+### Passo 9: Encerrar e limpar o ambiente
 
 Para parar os serviços mantendo os dados:
 
@@ -319,7 +319,7 @@ docker compose down -v
 
 | Sintoma | Causa provável | Solução |
 | :--- | :--- | :--- |
-| `port is already allocated` | Porta `3306` ou `8080` em uso | Altere `MYSQL_PORT` ou `NGINX_PORT` no `.env` e rode `docker compose up -d` novamente |
+| `port is already allocated` | Porta `3306` ou `8081` em uso | Altere `MYSQL_PORT` ou `NGINX_PORT` no `.env` e rode `docker compose up -d` novamente |
 | MySQL reiniciando em loop | Variáveis de ambiente ausentes/inválidas | Confira o `.env` e execute `docker compose logs mysql` |
 | Nginx não inicia | MySQL ainda não ficou `healthy` | Aguarde e verifique `docker compose ps` e os logs do MySQL |
 | `getent: not found` ou `bash: not found` | Imagem diferente da esperada | Garanta que o serviço usa `nginx:1.27` (imagem Debian, com `bash` e `getent`) |
@@ -329,14 +329,29 @@ docker compose down -v
 
 ---
 
-## 📋 Evidências Sugeridas para Entrega
+## 📋 Evidências
 
-1. Print de `docker compose ps` com os dois serviços em execução e o MySQL `healthy`.
-2. Print da página `http://localhost:8080` e da saída de `http://localhost:8080/health`.
-3. Print do `SELECT * FROM alunos;` antes da recriação dos containers.
-4. Print do teste de comunicação `OK: nginx alcancou mysql:3306`.
-5. Print do `SELECT * FROM alunos;` após `docker compose down` e `docker compose up -d`, comprovando a persistência.
-6. Breve conclusão explicando o papel do `.env`, da rede e do volume.
+<details>
+<summary>Clique para visualizar as capturas de tela</summary>
+
+### Serviços ativos
+![Serviços ativos](./evidencias/servicos-ativos.png)
+
+### Página do Nginx
+![Página do Nginx](./evidencias/nginx-home.png)
+
+### Endpoint de saúde do Nginx
+![Endpoint de saúde do Nginx](./evidencias/nginx-health.png)
+
+### Tabela no MySQL
+![Tabela alunos no MySQL](./evidencias/tabela-mysql.png)
+
+### Persistência após recriar os containers
+![Persistência dos dados](./evidencias/persistencia.png)
+
+</details>
+
+> Observação: a porta padrão desta atividade é `8081`, evitando conflito com serviços que já utilizam a `8080`.
 
 ---
 
