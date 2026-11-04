@@ -27,6 +27,7 @@ Este módulo contém as implementações práticas, automações e documentaçõ
 | Item | Atividade | Descrição / Tecnologia | Status |
 | :---: | :--- | :--- | :---: |
 | **01** | **[Validação Automática de Serviço em CI/CD](./atividade-01-pipeline/README.md)** | Automação do ciclo completo (*pull*, *run*, *smoke test/ping* e *cleanup*) usando **Redis** no GitHub Actions. | ✅ Concluído |
+| **02** | **[Orquestração de Nginx e MySQL com Docker Compose](./atividade-02-compose/README.md)** | Aplicação multi-serviço com **Nginx** e **MySQL**, variáveis de ambiente, volume persistente, rede interna e testes de comunicação/persistência. | ✅ Concluído |
 
 <!-- Novas atividades práticas serão adicionadas neste índice conforme o avanço do curso -->
 

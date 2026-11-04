@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 02 - Docker Compose</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --accent: #38bdf8;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(circle at top, #1e3a8a 0%, var(--bg) 55%);
+            color: var(--text);
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        main {
+            width: min(960px, 100%);
+        }
+
+        header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        header p {
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 32px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        code {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Atividade 02 - <span>Docker Compose</span></h1>
+            <p>Dois serviços, uma rede e dados persistentes.</p>
+        </header>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Nginx</h2>
+                <p>Servidor web responsável por entregar esta página e o endpoint de verificação <code>/health</code>.</p>
+                <span class="tag">porta 80 no container</span>
+            </article>
+
+            <article class="card">
+                <h2>MySQL</h2>
+                <p>Banco de dados relacional inicializado com a tabela <code>alunos</code> e dados de exemplo.</p>
+                <span class="tag">porta 3306 no container</span>
+            </article>
+
+            <article class="card">
+                <h2>Persistência</h2>
+                <p>Os dados do MySQL ficam no volume nomeado <code>aponti_mysql_data</code>, sobrevivendo à recriação dos containers.</p>
+                <span class="tag">volume nomeado</span>
+            </article>
+
+            <article class="card">
+                <h2>Comunicação</h2>
+                <p>Os serviços compartilham a rede <code>aponti_network</code> e se resolvem pelo nome do serviço.</p>
+                <span class="tag">DNS interno</span>
+            </article>
+        </section>
+
+        <footer>
+            <p>Se você está vendo esta página, o serviço Nginx está no ar.</p>
+            <p>Valide a comunicação e a persistência pelos comandos descritos no README da atividade.</p>
+        </footer>
+    </main>
+</body>
+</html>
