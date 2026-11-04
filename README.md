@@ -12,6 +12,7 @@ O repositório é organizado de forma modular, garantindo a separação entre a 
 aponti-devops
 ├── .github/workflows/         # Esteiras automatizadas de CI/CD (GitHub Actions)
 ├── modulo-docker/             # Práticas de conteinerização e orquestração Docker
+├── modulo-kubernetes/         # Práticas de orquestração com Kubernetes e Minikube
 ├── modulo-devsecops/          # Resoluções práticas, scripts de segurança e documentação
 ├── modulo-terraform/          # Infraestrutura como código (Terraform) e VMs (AWS)
 └── material-de-estudo/        # Slides, apostilas e enunciados divididos por módulos
