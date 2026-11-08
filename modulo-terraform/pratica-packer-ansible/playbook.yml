@@ -1,0 +1,21 @@
+---
+- name: Configura o servidor web Apache
+  hosts: all
+  become: true
+  tasks:
+    - name: Atualiza o cache do apt
+      apt:
+        update_cache: true
+
+    - name: Instala o Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Copia a pagina HTML personalizada
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: "0644"
