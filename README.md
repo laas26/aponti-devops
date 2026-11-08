@@ -15,6 +15,7 @@ aponti-devops
 ├── modulo-kubernetes/         # Práticas de orquestração com Kubernetes e Minikube
 ├── modulo-devsecops/          # Resoluções práticas, scripts de segurança e documentação
 ├── modulo-terraform/          # Infraestrutura como código (Terraform) e VMs (AWS)
+├── labs/                      # Laboratórios práticos e exercícios de fixação
 └── material-de-estudo/        # Slides, apostilas e enunciados divididos por módulos
                         
 ```
