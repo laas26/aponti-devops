@@ -1,6 +1,6 @@
 # 🚀 Aponti DevOps - Formação e Práticas
 
-Repositório dedicado ao armazenamento de projetos, automações e práticas desenvolvidas ao longo da formação em DevOps pela Aponti.
+Repositório dedicado ao armazenamento de laboratórios, automações e práticas desenvolvidas ao longo da formação em DevOps pela Aponti.
 
 ---
 
@@ -23,4 +23,7 @@ aponti-devops
 ---
 
 ## 📄 Licença e Uso
-Este projeto tem fins educacionais e de construção de portfólio. 
+
+Este material possui fins estritamente educacionais e de construção de portfólio profissional. Todos os relatórios e atividades são de autoria própria. 
+
+O conteúdo está totalmente disponível para que outros estudantes possam consultar, estudar e se inspirar. Contudo, não é autorizada a reprodução ou cópia integral deste material para fins comerciais ou entregas acadêmicas de terceiros. 
